@@ -3,6 +3,9 @@ NAME = ft_ls
 SRCS := main.c \
         utils.c \
         parsing.c \
+        exec.c \
+        clear.c \
+        recursive.c \
 
 SRCS := $(addprefix srcs/, $(SRCS))
 
@@ -10,7 +13,7 @@ OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
 DEPS := $(patsubst srcs/%.c,deps/%.d,$(SRCS))
 
 CXX := cc
-CXXFLAGS := -Wall -Werror -Wextra -MMD
+CXXFLAGS := -Wall -Wextra -MMD -g
 
 
 COLORS := $(shell seq 31 37)

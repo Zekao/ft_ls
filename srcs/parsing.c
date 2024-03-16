@@ -12,8 +12,10 @@
 
 #include "../includes/ft_ls.h"
 
-void parse_options(t_options *options, char **params) {
+int parse_options(t_options *options, char **params) {
   ft_memset(options, false, sizeof(t_options));
+  int ret;
+  ret = 0;
 
   for (int i = 0, j; params[i] && params[i][0] == '-'; i++) {
     for (j = 1; params[i][j]; j++) {
@@ -40,5 +42,9 @@ void parse_options(t_options *options, char **params) {
         exit(1);
       }
     }
+    if (!params[i + 1])
+      return i + 1;
+    ret += 1;
   }
+  return ret;
 }
