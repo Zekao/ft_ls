@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <string.h>
 
 void print_options(t_options opts) {
   printf("LIST: %d\n", opts.flags[LIST]);
@@ -23,7 +24,7 @@ void print_options(t_options opts) {
 int main(int argc, char **argv) {
   t_options options;
   int count = parse_options(&options, argv + 1) + 1;
-  print_options(options);
+  // print_options(options);
   argv += count;
   argc -= count;
   if (argv[0] == NULL || argc == 0) {
@@ -34,8 +35,9 @@ int main(int argc, char **argv) {
 }
 
 int ft_ls(int argc, char **argv, t_options options) {
-
+  char *tmp;
   t_content *contents;
+
   contents = malloc(sizeof(t_content) * argc);
   if (!contents)
     return 1;
@@ -44,11 +46,15 @@ int ft_ls(int argc, char **argv, t_options options) {
       return 0;
   }
   for (int i = 0; i < argc; i++) {
-    ft_putstr(argv[i]);
-    ft_putstr(":\n");
+    if (i != 1) {
+      ft_putstr(argv[i]);
+      ft_putstr(":\n");
+    }
+
     for (int j = 0; contents[i].files[j]; j++) {
-      ft_putstr(contents[i].files[j]);
-      ft_putchar('\t');
+      if (options.flags[ALL] == false && contents[i].files[j][0] == '.')
+        continue;
+      ft_putendt(contents[i].files[j]);
     }
     ft_putchar('\n');
     if (options.flags[RECURSIVE] == true) {
@@ -56,7 +62,15 @@ int ft_ls(int argc, char **argv, t_options options) {
         if (contents[i].is_dir[j] == 1) {
           if (ft_strcmp(contents[i].files[j], ".") != 0 &&
               ft_strcmp(contents[i].files[j], "..") != 0) {
-            ft_ls_recursive(argv + i, options);
+            char *new_argv[2];
+            tmp = ft_strjoin(argv[i], "/");
+            if (!tmp)
+              return 1;
+            new_argv[0] = ft_strjoin(tmp, contents[i].files[j]);
+            new_argv[1] = NULL;
+            free(tmp);
+            ft_ls_recursive(new_argv, options);
+            free(new_argv[0]);
           }
         }
       }

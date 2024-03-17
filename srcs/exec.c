@@ -48,7 +48,6 @@ int execute(char *path, t_content *content) {
   ft_memset(content->is_dir, false, size);
   dir = opendir(path);
   if (!dir) {
-    printf("PATH: %s\n", path);
     return perror("ft_ls"), free(content->files), 1;
   }
   i = 0;
