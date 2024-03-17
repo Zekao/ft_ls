@@ -21,6 +21,11 @@ int ft_ls_recursive(char **argv, t_options options) {
     if (!path)
       return (free(tmp), 1);
     free(tmp);
+
+    if (dp->d_name[0] == '.' && options.flags[ALL] == false) {
+      free(path);
+      continue;
+    }
     ft_putendt(dp->d_name);
 
     if (dp->d_type == DT_DIR && options.flags[RECURSIVE]) {

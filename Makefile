@@ -6,6 +6,8 @@ SRCS := main.c \
         exec.c \
         clear.c \
         recursive.c \
+        print.c \
+        sort.c \
 
 SRCS := $(addprefix srcs/, $(SRCS))
 
