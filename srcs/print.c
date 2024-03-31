@@ -1,6 +1,6 @@
 #include "../includes/ft_ls.h"
 
-static void display_list(char *owner, char *group, char *size, char *updated_at,
+void display_list(char *owner, char *group, char *size, char *updated_at,
                          char *file) {
   ft_putendt(owner);
   ft_putendt(group);
@@ -35,6 +35,8 @@ int print_ls(int argc, char **argv, t_content *contents, t_options options) {
             if (!tmp)
               return 1;
             new_argv[0] = ft_strjoin(tmp, contents[i].files[j]);
+            if (!new_argv[0])
+              return 1;
             new_argv[1] = NULL;
             free(tmp);
             ft_ls_recursive(new_argv, options);
@@ -59,7 +61,7 @@ void print_list(t_content *contents, t_options options) {
       }
       display_list(contents[i].owner[j], contents[i].group[j],
                    contents[i].size[j], contents[i].updated_at[j],
-                   contents[i].files[j]);
+                   contents[i].files[j]); 
       j++;
     }
     j = 0;
@@ -75,10 +77,10 @@ void handle_output(int argc, char **argv, t_content *contents,
   if (options.flags[REVERSE] == true) {
     reverse_sort_content(contents);
   }
-  if (options.flags[LIST] == true) {
+  if (options.flags[LIST] == true && options.flags[RECURSIVE] == false) {
     print_list(contents, options);
   } else {
-    if (print_ls(argc, argv, contents, options)) {
+    if (print_ls( argc, argv, contents, options)) {
       ;
     }
   }
