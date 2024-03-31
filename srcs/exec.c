@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 19:54:42 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/16 20:46:52 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/03/31 14:57:47 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,19 @@ int execute(char *path, t_content *content) {
   allocate_memory(&(content->size), size, content, 0);
   content->timestamps = calloc(sizeof(long int), size);
   if (content->timestamps == NULL) {
-    return free_struct(content), 1;
+    return 1;
   }
 
   ft_memset(content->is_dir, false, size);
   ft_memset(content->timestamps, 0, size);
   dir = opendir(path);
   if (!dir) {
-    return perror("ft_ls"), free_struct(content), 1;
+    return perror("ft_ls"), 1;
   }
   i = 0;
   while ((entry = readdir(dir))) {
     content->files[i] = ft_strdup(entry->d_name);
     if (!content->files[i]) {
-      free_struct(content);
       return 1;
     }
     if (entry->d_type == DT_DIR) {
@@ -115,13 +114,11 @@ int execute(char *path, t_content *content) {
     }
     char *tmp = ft_strjoin(path, "/");
     if (!tmp) {
-      free_struct(content);
       return 1;
     }
     char *tmp2 = ft_strjoin(tmp, content->files[i]);
     if (!tmp2) {
       free(tmp);
-      free_struct(content);
       return 1;
     }
     fill_content(tmp2, content, i);
