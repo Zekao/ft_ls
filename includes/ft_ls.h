@@ -70,3 +70,4 @@ char *ft_itoa(int nbr);
 void sort_content(t_content *content);
 void reverse_sort_content(t_content *content);
 void sort_timestamps(t_content *content);
+void print_list(t_content *contents, t_options options);

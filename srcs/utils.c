@@ -14,11 +14,23 @@
 
 void ft_putchar(char c) { write(1, &c, 1); }
 
-void ft_putstr(char *str) { write(1, str, ft_strlen(str)); }
+void ft_putstr(char *str) {
+  if (!str) {
+    return;
+  }
+  write(1, str, ft_strlen(str));
+}
 
 void ft_putendt(char *str) {
+  if (!str)
+    return;
   write(1, str, ft_strlen(str));
   ft_putchar('\t');
+}
+
+void ft_putendl(char *str) {
+  write(1, str, ft_strlen(str));
+  ft_putchar('\n');
 }
 
 int ft_strlen(const char *str) {
@@ -149,4 +161,10 @@ char *ft_itoa(int nbr) {
     size--;
   }
   return (str);
+}
+
+void ft_error(char *str) {
+  write(2, "Error: ", 7);
+  write(2, str, ft_strlen(str));
+  write(2, "\n", 1);
 }

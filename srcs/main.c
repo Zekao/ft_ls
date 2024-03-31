@@ -31,9 +31,12 @@ int ft_ls(int argc, char **argv, t_options options) {
   contents = calloc(sizeof(t_content), argc + 1);
   if (!contents)
     return 1;
+  int j = 0;
   for (int i = 0; i < argc; i++) {
-    if (execute(argv[i], &contents[i]) == 1)
-      return 0;
+    if (execute(argv[i], &contents[j]) == 1)
+      continue;
+    // return free_struct(contents), 0;
+    j++;
   }
   handle_output(argc, argv, contents, options);
   free_struct(contents);

@@ -8,6 +8,7 @@ SRCS := main.c \
         recursive.c \
         print.c \
         sort.c \
+        debug.c \
 
 SRCS := $(addprefix srcs/, $(SRCS))
 

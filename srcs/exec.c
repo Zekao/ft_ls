@@ -14,17 +14,17 @@
 
 int allocate_memory(char ***ptr, int size, t_content *content, int is_bool) {
   if (is_bool) {
-    content->is_dir = malloc(sizeof(int) * size);
+    content->is_dir = calloc(sizeof(int), size);
     if (content->is_dir == NULL) {
-      return free_struct(content), 1;
+      free_struct(content), exit(EXIT_FAILURE);
     }
     for (int i = 0; i < size; i++) {
       content->is_dir[i] = 0;
     }
   } else {
-    *ptr = malloc(sizeof(char *) * (size + 1));
-    if (*ptr == NULL) {
-      return free_struct(content), 1;
+    *ptr = calloc(sizeof(char *), (size + 1));
+    if (!*ptr) {
+      free_struct(content), exit(EXIT_FAILURE);
     }
     (*ptr)[size] = NULL;
   }
@@ -55,18 +55,15 @@ void fill_content(char *path, t_content *content, int i) {
   char *updated_at;
 
   if (stat(path, &fileStat) < 0) {
-    printf("Error: %s\n", path);
+    perror(path);
     return;
   }
 
   user = getpwuid(fileStat.st_uid);
-  if (user == NULL) {
-    exit(EXIT_FAILURE);
-  }
-
   group = getgrgid(fileStat.st_gid);
-  if (group == NULL) {
-    exit(EXIT_FAILURE);
+  if (!group || !user) {
+    perror(path);
+    return;
   }
   updated_at = ctime(&fileStat.st_mtime);
   updated_at[ft_strlen(updated_at) - 1] = '\0';
@@ -84,6 +81,10 @@ int execute(char *path, t_content *content) {
   int size;
 
   size = count_files(path);
+  if (size == 0) {
+    perror(path);
+    return 1;
+  }
 
   allocate_memory(NULL, size, content, 1);
   allocate_memory(&(content->files), size, content, 0);
@@ -91,7 +92,7 @@ int execute(char *path, t_content *content) {
   allocate_memory(&(content->group), size, content, 0);
   allocate_memory(&(content->updated_at), size, content, 0);
   allocate_memory(&(content->size), size, content, 0);
-  content->timestamps = malloc(sizeof(long int) * size);
+  content->timestamps = calloc(sizeof(long int), size);
   if (content->timestamps == NULL) {
     return free_struct(content), 1;
   }
