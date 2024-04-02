@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/04/02 08:19:15 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:24:57 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 int ft_ls(int argc, char **argv, t_options options) {
   t_content *contents;
 
-  contents = calloc(sizeof(t_content), argc + 1);
+  contents = ft_calloc(sizeof(t_content), argc + 1);
   if (!contents)
     return 1;
   int j = 0;

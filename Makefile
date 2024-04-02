@@ -16,7 +16,7 @@ OBJS = $(patsubst srcs/%.c,objs/%.o,$(SRCS))
 DEPS := $(patsubst srcs/%.c,deps/%.d,$(SRCS))
 
 CXX := cc
-CXXFLAGS := -Wall -Wextra -MMD -g
+CXXFLAGS := -Wall -Werror -Wextra -MMD -g
 
 
 COLORS := $(shell seq 31 37)

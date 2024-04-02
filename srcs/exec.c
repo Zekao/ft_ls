@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 19:54:42 by emaugale          #+#    #+#             */
-/*   Updated: 2024/04/02 09:14:13 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 09:24:57 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int allocate_memory(char ***ptr, int size, t_content *content, int is_bool) {
   if (is_bool) {
-    content->is_dir = calloc(sizeof(int), size);
+    content->is_dir = ft_calloc(sizeof(int), size);
     if (content->is_dir == NULL) {
       free_struct(content), exit(EXIT_FAILURE);
     }
@@ -22,7 +22,7 @@ int allocate_memory(char ***ptr, int size, t_content *content, int is_bool) {
       content->is_dir[i] = 0;
     }
   } else {
-    *ptr = calloc(sizeof(char *), (size + 1));
+    *ptr = ft_calloc(sizeof(char *), (size + 1));
     if (!*ptr) {
       free_struct(content), exit(EXIT_FAILURE);
     }
@@ -92,7 +92,7 @@ int execute(char *path, t_content *content) {
   allocate_memory(&(content->group), size, content, 0);
   allocate_memory(&(content->updated_at), size, content, 0);
   allocate_memory(&(content->size), size, content, 0);
-  content->timestamps = calloc(sizeof(long int), size);
+  content->timestamps = ft_calloc(sizeof(long int), size);
   if (content->timestamps == NULL) {
     return 1;
   }

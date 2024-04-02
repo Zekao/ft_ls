@@ -29,7 +29,7 @@ int ft_ls_recursive(char **argv, t_options options) {
       continue;
     }
     if (options.flags[LIST]) {
-      temp_contents = calloc(sizeof(t_content), 2);
+      temp_contents = ft_calloc(sizeof(t_content), 2);
       if (!temp_contents)
         return 1;
       if (execute(argv[0], &temp_contents[0]) == 1)
