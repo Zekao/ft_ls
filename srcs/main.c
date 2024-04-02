@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/31 18:13:59 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:19:15 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int ft_ls(int argc, char **argv, t_options options) {
   for (int i = 0; i < argc; i++) {
     if (execute(argv[i], &contents[j]) == 1)
       continue;
-    // return free_struct(contents), 0;
     j++;
   }
   handle_output(argc, argv, contents, options);

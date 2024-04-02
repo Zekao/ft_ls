@@ -22,7 +22,12 @@ int print_ls(int argc, char **argv, t_content *contents, t_options options) {
     for (int j = 0; contents[i].files[j]; j++) {
       if (options.flags[ALL] == false && contents[i].files[j][0] == '.')
         continue;
-      ft_putendt(contents[i].files[j]);
+      if (options.flags[LIST] == true)
+        display_list(contents[i].owner[j], contents[i].group[j],
+                     contents[i].size[j], contents[i].updated_at[j],
+                     contents[i].files[j]);
+      else
+        ft_putendt(contents[i].files[j]);
     }
     ft_putchar('\n');
     if (options.flags[RECURSIVE] == true) {

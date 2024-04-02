@@ -11,6 +11,7 @@ int ft_ls_recursive(char **argv, t_options options) {
   if (!dir)
     return perror("opendir"), 1;
 
+  ft_putchar('\n');
   ft_putstr(argv[0]);
   ft_putstr(":\n");
   while ((dp = readdir(dir)) != NULL) {
@@ -39,6 +40,7 @@ int ft_ls_recursive(char **argv, t_options options) {
 
       free_struct(temp_contents);
       } else {
+        printf("dtet\n");
       ft_putendt(dp->d_name);
     }
 

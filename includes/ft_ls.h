@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/31 17:23:25 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:36:15 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int ft_ls(int argc, char **argv, t_options options);
 int ft_strcmp(char *s1, char *s2);
 int ft_strncmp(char *s1, char *s2, size_t n);
 char *ft_strjoin(char const *s1, char const *s2);
-// int ft_ls_recursive(char **argv, t_content *contents, t_options options);
 int ft_ls_recursive(char **argv, t_options options);
 
 int print_ls(int argc, char **argv, t_content *contents, t_options options);
@@ -75,3 +74,5 @@ void print_list(t_content *contents, t_options options);
 
 void display_list(char *owner, char *group, char *size, char *updated_at,
                   char *file);
+
+void	*ft_calloc(size_t count, size_t size);

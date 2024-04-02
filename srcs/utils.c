@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/31 14:08:33 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:36:39 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,15 @@ void ft_error(char *str) {
   write(2, "Error: ", 7);
   write(2, str, ft_strlen(str));
   write(2, "\n", 1);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*str;
+
+	str = (void *)malloc(count * size);
+	if (!str)
+		return (NULL);
+	ft_memset(str, 0, (count * size));
+	return (str);
 }

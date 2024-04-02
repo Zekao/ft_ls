@@ -1,9 +1,14 @@
 #include "../includes/ft_ls.h"
 
 void print_options(t_options opts) {
-  printf("LIST: %d\n", opts.flags[LIST]);
-  printf("ALL: %d\n", opts.flags[ALL]);
-  printf("RECURSIVE: %d\n", opts.flags[RECURSIVE]);
-  printf("REVERSE: %d\n", opts.flags[REVERSE]);
-  printf("TIME: %d\n", opts.flags[TIME]);
+  ft_putstr("LIST: ");
+  ft_putendl(opts.flags[LIST] ? "true" : "false");
+  ft_putstr("ALL: ");
+  ft_putendl(opts.flags[ALL] ? "true" : "false");
+  ft_putstr("RECURSIVE: ");
+  ft_putendl(opts.flags[RECURSIVE] ? "true" : "false");
+  ft_putstr("REVERSE: ");
+  ft_putendl(opts.flags[REVERSE] ? "true" : "false");
+  ft_putstr("TIME: ");
+  ft_putendl(opts.flags[TIME] ? "true" : "false");
 }
