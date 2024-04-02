@@ -40,7 +40,6 @@ int ft_ls_recursive(char **argv, t_options options) {
 
       free_struct(temp_contents);
       } else {
-        printf("dtet\n");
       ft_putendt(dp->d_name);
     }
 
