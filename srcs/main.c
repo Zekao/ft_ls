@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/16 19:46:52 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:19:15 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int ft_ls(int argc, char **argv, t_options options) {
   contents = calloc(sizeof(t_content), argc + 1);
   if (!contents)
     return 1;
+  int j = 0;
   for (int i = 0; i < argc; i++) {
-    if (execute(argv[i], &contents[i]) == 1)
-      return 0;
+    if (execute(argv[i], &contents[j]) == 1)
+      continue;
+    j++;
   }
   handle_output(argc, argv, contents, options);
   free_struct(contents);

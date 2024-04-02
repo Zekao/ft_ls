@@ -1,11 +1,12 @@
 #include "../includes/ft_ls.h"
 
-void print_options(t_options opts) {
-  printf("LIST: %d\n", opts.flags[LIST]);
-  printf("ALL: %d\n", opts.flags[ALL]);
-  printf("RECURSIVE: %d\n", opts.flags[RECURSIVE]);
-  printf("REVERSE: %d\n", opts.flags[REVERSE]);
-  printf("TIME: %d\n", opts.flags[TIME]);
+void display_list(char *owner, char *group, char *size, char *updated_at,
+                         char *file) {
+  ft_putendt(owner);
+  ft_putendt(group);
+  ft_putendt(size);
+  ft_putendt(updated_at);
+  ft_putendl(file);
 }
 
 int print_ls(int argc, char **argv, t_content *contents, t_options options) {
@@ -16,10 +17,17 @@ int print_ls(int argc, char **argv, t_content *contents, t_options options) {
       ft_putstr(":\n");
     }
 
+    if (contents[i].files == NULL)
+      return 1;
     for (int j = 0; contents[i].files[j]; j++) {
       if (options.flags[ALL] == false && contents[i].files[j][0] == '.')
         continue;
-      ft_putendt(contents[i].files[j]);
+      if (options.flags[LIST] == true)
+        display_list(contents[i].owner[j], contents[i].group[j],
+                     contents[i].size[j], contents[i].updated_at[j],
+                     contents[i].files[j]);
+      else
+        ft_putendt(contents[i].files[j]);
     }
     ft_putchar('\n');
     if (options.flags[RECURSIVE] == true) {
@@ -32,6 +40,8 @@ int print_ls(int argc, char **argv, t_content *contents, t_options options) {
             if (!tmp)
               return 1;
             new_argv[0] = ft_strjoin(tmp, contents[i].files[j]);
+            if (!new_argv[0])
+              return 1;
             new_argv[1] = NULL;
             free(tmp);
             ft_ls_recursive(new_argv, options);
@@ -54,9 +64,9 @@ void print_list(t_content *contents, t_options options) {
         j++;
         continue;
       }
-      printf("%s %s %s %s %s\n", contents[i].owner[j], contents[i].group[j],
-             contents[i].size[j], contents[i].updated_at[j],
-             contents[i].files[j]);
+      display_list(contents[i].owner[j], contents[i].group[j],
+                   contents[i].size[j], contents[i].updated_at[j],
+                   contents[i].files[j]); 
       j++;
     }
     j = 0;
@@ -72,11 +82,11 @@ void handle_output(int argc, char **argv, t_content *contents,
   if (options.flags[REVERSE] == true) {
     reverse_sort_content(contents);
   }
-  if (options.flags[LIST] == true) {
+  if (options.flags[LIST] == true && options.flags[RECURSIVE] == false) {
     print_list(contents, options);
   } else {
-    if (print_ls(argc, argv, contents, options)) {
-      perror("ft_ls");
+    if (print_ls( argc, argv, contents, options)) {
+      ;
     }
   }
 }

@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/16 19:31:52 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/03/31 17:57:46 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int parse_options(t_options *options, char **params) {
         ft_putstr("ft_ls: illegal option -- ");
         ft_putchar(params[i][j]);
         ft_putchar('\n');
-        exit(1);
+        exit(1);  
       }
     }
     if (!params[i + 1])

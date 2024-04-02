@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:12:49 by emaugale          #+#    #+#             */
-/*   Updated: 2024/03/16 19:31:52 by emaugale         ###   ########.fr       */
+/*   Updated: 2024/04/02 08:36:15 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,9 @@ char *ft_itoa(int nbr);
 void sort_content(t_content *content);
 void reverse_sort_content(t_content *content);
 void sort_timestamps(t_content *content);
+void print_list(t_content *contents, t_options options);
+
+void display_list(char *owner, char *group, char *size, char *updated_at,
+                  char *file);
+
+void	*ft_calloc(size_t count, size_t size);
